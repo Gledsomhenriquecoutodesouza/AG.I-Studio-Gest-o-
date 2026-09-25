@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: salao
+      POSTGRES_USER: salao
+      POSTGRES_PASSWORD: salao
+    ports:
+      - "5432:5432"
+    volumes:
+      - salao_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U salao -d salao"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  api:
+    build: ./backend/Salao.Api
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Salon: Host=db;Port=5432;Database=salao;Username=salao;Password=salao
+    ports:
+      - "5000:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    build: ./frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+volumes:
+  salao_data:

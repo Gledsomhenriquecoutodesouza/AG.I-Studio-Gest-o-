@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/.next/
+**/out/
+**/.vercel/
+**/.env
+**/.env.*
+!**/.env.example
+**/npm-debug.log*
+**/.nuget/
+**/.dotnet/
+**/.nuget-profile/
+.docker-local-ca.crt
