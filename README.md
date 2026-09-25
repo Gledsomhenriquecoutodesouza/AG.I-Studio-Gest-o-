@@ -68,8 +68,8 @@ This repository contains both a Next.js frontend and a .NET API. Deploy the fron
 
 1. Import this repository in Vercel and set **Root Directory** to `frontend`.
 2. Set the Vercel environment variable `NEXT_PUBLIC_API_URL` to the public API URL ending in `/api`, for example `https://api.example.com/api`.
-3. Deploy `backend/Salao.Api` using its Dockerfile to a .NET/container host, and provision a persistent PostgreSQL database.
-4. Set the API environment variables `ConnectionStrings__Salon`, `Cors__AllowedOrigins`, `Admin__AccessCode`, and `Admin__ChangeCode` on the API host. `Cors__AllowedOrigins` accepts semicolon-separated frontend origins, such as `https://your-app.vercel.app;https://www.example.com`.
+3. Deploy the API from the repository's `render.yaml` Blueprint (Render Dashboard → **New** → **Blueprint**) or use the Dockerfile at `backend/Salao.Api/Dockerfile`. The Blueprint uses Render's free web-service plan; free services sleep after 15 minutes idle and may take about a minute to wake up.
+4. Provision a persistent PostgreSQL database with Supabase or Neon. Set the API environment variables `ConnectionStrings__Salon`, `Cors__AllowedOrigins`, `Admin__AccessCode`, and `Admin__ChangeCode` on Render. `Cors__AllowedOrigins` accepts semicolon-separated frontend origins, such as `https://your-app.vercel.app;https://www.example.com`.
 5. Set the admin access/change codes to private values before publishing a live salon deployment. The checked-in defaults are intended only for local development.
 
 The API creates its initial database schema and seeds the salon's starter service catalog on first startup. Keep the database on persistent storage.
@@ -142,8 +142,8 @@ Este repositório contém o frontend Next.js e a API .NET. Publique o frontend n
 
 1. Importe este repositório na Vercel e defina **Root Directory** como `frontend`.
 2. Configure a variável `NEXT_PUBLIC_API_URL` na Vercel com o endereço público da API terminado em `/api`, por exemplo `https://api.exemplo.com/api`.
-3. Publique `backend/Salao.Api` usando seu Dockerfile em um host compatível com .NET/containers e crie um banco PostgreSQL persistente.
-4. Configure na API `ConnectionStrings__Salon`, `Cors__AllowedOrigins`, `Admin__AccessCode` e `Admin__ChangeCode`. `Cors__AllowedOrigins` aceita origens separadas por ponto e vírgula, como `https://seu-app.vercel.app;https://www.exemplo.com`.
+3. Publique a API usando o Blueprint `render.yaml` (Render Dashboard → **New** → **Blueprint**) ou o Dockerfile em `backend/Salao.Api/Dockerfile`. O Blueprint usa o plano gratuito de web service do Render; serviços gratuitos hibernam após 15 minutos sem tráfego e podem levar cerca de um minuto para despertar.
+4. Crie um banco PostgreSQL persistente no Supabase ou Neon. Configure no Render `ConnectionStrings__Salon`, `Cors__AllowedOrigins`, `Admin__AccessCode` e `Admin__ChangeCode`. `Cors__AllowedOrigins` aceita origens separadas por ponto e vírgula, como `https://seu-app.vercel.app;https://www.exemplo.com`.
 5. Defina códigos administrativos privados antes de usar o sistema com dados reais. Os valores padrão versionados servem apenas para desenvolvimento local.
 
 Na primeira inicialização, a API cria o esquema inicial e cadastra o catálogo base de serviços. Mantenha o banco em armazenamento persistente.

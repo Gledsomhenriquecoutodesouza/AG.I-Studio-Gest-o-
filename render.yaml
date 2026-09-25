@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: agenda-interativa-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Salao.Api/Dockerfile
+    dockerContext: ./backend/Salao.Api
+    healthCheckPath: /health
+    envVars:
+      - key: ConnectionStrings__Salon
+        sync: false
+      - key: Cors__AllowedOrigins
+        sync: false
+      - key: Admin__AccessCode
+        sync: false
+      - key: Admin__ChangeCode
+        sync: false
