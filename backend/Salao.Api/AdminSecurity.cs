@@ -65,3 +65,29 @@ public static class AdminSessionTokens
         return Convert.FromBase64String(base64);
     }
 }
+
+public static class SalonUserSessions
+{
+    public static string Create(SalonUser user)
+    {
+        var payload = Encoding.UTF8.GetBytes($"{user.Id}:{DateTimeOffset.UtcNow.AddHours(12).ToUnixTimeSeconds()}");
+        var signature = HMACSHA256.HashData(Convert.FromBase64String(user.SessionKey), payload);
+        return $"{ToBase64Url(payload)}.{ToBase64Url(signature)}";
+    }
+
+    public static bool TryGetUserId(string token, out long id)
+    {
+        id = 0;
+        try { var p=token.Split('.',2);if(p.Length!=2)return false;var data=FromBase64Url(p[0]);var fields=Encoding.UTF8.GetString(data).Split(':',2);return fields.Length==2&&long.TryParse(fields[0],out id)&&id>0; }
+        catch (FormatException) { return false; }
+    }
+
+    public static bool IsValid(SalonUser user, string token)
+    {
+        try { var p=token.Split('.',2);if(p.Length!=2)return false;var payload=FromBase64Url(p[0]);var fields=Encoding.UTF8.GetString(payload).Split(':',2);if(fields.Length!=2||!long.TryParse(fields[0],out var id)||id!=user.Id||!long.TryParse(fields[1],out var expiry)||DateTimeOffset.UtcNow.ToUnixTimeSeconds()>=expiry)return false;var signature=FromBase64Url(p[1]);var expected=HMACSHA256.HashData(Convert.FromBase64String(user.SessionKey),payload);return CryptographicOperations.FixedTimeEquals(signature,expected); }
+        catch (FormatException) { return false; }
+    }
+
+    private static string ToBase64Url(byte[] value)=>Convert.ToBase64String(value).TrimEnd('=').Replace('+','-').Replace('/','_');
+    private static byte[] FromBase64Url(string value){var b=value.Replace('-','+').Replace('_','/');b+=new string('=',(4-b.Length%4)%4);return Convert.FromBase64String(b);}
+}
