@@ -1,13 +1,27 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 using Salao.Api;
 var builder = WebApplication.CreateBuilder(args);
 var renderPort=Environment.GetEnvironmentVariable("PORT");
 if(!string.IsNullOrWhiteSpace(renderPort))builder.WebHost.UseUrls($"http://0.0.0.0:{renderPort}");
 builder.Services.AddDbContext<SalonDb>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Salon") ?? "Host=localhost;Port=5432;Database=salao;Username=salao;Password=salao"));
 var allowedOrigins=builder.Configuration["Cors:AllowedOrigins"]?.Split(';',StringSplitOptions.TrimEntries|StringSplitOptions.RemoveEmptyEntries)??new[]{"http://localhost:3000"};
-builder.Services.AddCors(o => o.AddDefaultPolicy(p => p.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(o => o.AddDefaultPolicy(p => p.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("X-Session-Expired")));
 builder.Services.AddControllers(); builder.Services.AddEndpointsApiExplorer(); builder.Services.AddSwaggerGen();
-var app = builder.Build(); app.UseCors(); app.UseSwagger(); app.UseSwaggerUI(); app.MapControllers(); app.MapGet("/health",()=>Results.Ok(new{status="ok"}));
+builder.Services.AddRateLimiter(options => { options.RejectionStatusCode=429; options.AddPolicy("admin-login", context => RateLimitPartition.GetFixedWindowLimiter(context.Connection.RemoteIpAddress?.ToString()??"unknown", _=>new FixedWindowRateLimiterOptions { PermitLimit=6, Window=TimeSpan.FromMinutes(5), QueueLimit=0, AutoReplenishment=true })); });
+var app = builder.Build(); app.UseRouting(); app.UseCors(); app.UseRateLimiter();
+app.Use(async (context,next)=>{
+ if(context.Request.Path.StartsWithSegments("/api")&&!string.Equals(context.Request.Path.Value,"/api/admin/login",StringComparison.OrdinalIgnoreCase)){
+  var authorization=context.Request.Headers.Authorization.ToString();
+  var token=authorization.StartsWith("Bearer ",StringComparison.OrdinalIgnoreCase)?authorization[7..]:"";
+  var db=context.RequestServices.GetRequiredService<SalonDb>();
+  var credential=await db.AdminCredentials.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==1);
+  if(credential is null||!AdminSessionTokens.IsValid(credential,token)){context.Response.StatusCode=401;context.Response.Headers["X-Session-Expired"]="true";await context.Response.WriteAsJsonAsync(new{message="Sessão expirada. Entre novamente."});return;}
+ }
+ await next();
+});
+app.UseSwagger(); app.UseSwaggerUI(); app.MapControllers(); app.MapGet("/health",()=>Results.Ok(new{status="ok"}));
 using (var scope = app.Services.CreateScope()) {
  var db=scope.ServiceProvider.GetRequiredService<SalonDb>();
  await db.Database.EnsureCreatedAsync();
@@ -60,10 +74,25 @@ using (var scope = app.Services.CreateScope()) {
    "PaymentMethod" character varying(20) NULL,
    "PaidAt" timestamp with time zone NULL
  );
+ CREATE TABLE IF NOT EXISTS public.admin_credentials (
+   "Id" smallint PRIMARY KEY CHECK ("Id" = 1),
+   "AccessCodeHash" text NOT NULL,
+   "ChangeCodeHash" text NOT NULL,
+   "SessionKey" text NOT NULL,
+   "UpdatedAt" timestamp with time zone NOT NULL
+ );
  ALTER TABLE public.appointments ADD COLUMN IF NOT EXISTS "BookingFeePaid" boolean NOT NULL DEFAULT FALSE;
  ALTER TABLE public.receivables ADD COLUMN IF NOT EXISTS "PaymentMethod" character varying(20);
  ALTER TABLE public.receivables ADD COLUMN IF NOT EXISTS "PaidAt" timestamp with time zone;
  """);
+ var adminCredential=await db.AdminCredentials.SingleOrDefaultAsync(x=>x.Id==1);
+ if(adminCredential is null){
+  var accessCode=builder.Configuration["Admin:AccessCode"]??"000000";
+  var changeCode=builder.Configuration["Admin:ChangeCode"]??"0000";
+  if(!System.Text.RegularExpressions.Regex.IsMatch(accessCode,@"^\d{6}$")||!System.Text.RegularExpressions.Regex.IsMatch(changeCode,@"^\d{4}$"))throw new InvalidOperationException("Os códigos iniciais do administrador devem conter seis e quatro dígitos.");
+  db.AdminCredentials.Add(new AdminCredential{AccessCodeHash=AdminCodeHash.Create(accessCode),ChangeCodeHash=AdminCodeHash.Create(changeCode),SessionKey=AdminSessionTokens.NewSigningKey(),UpdatedAt=DateTime.UtcNow});
+  await db.SaveChangesAsync();
+ }
  if(!await db.Services.AnyAsync()) { db.Services.AddRange(CatalogSeed.Items.Select(x=>new CatalogService { Category=x.Cat,Name=x.Name,Variant=x.Variant,HairLength=x.Length,Price=x.Price,PriceIsStartingAt=x.Starting })); await db.SaveChangesAsync(); }
 }
 app.Run();

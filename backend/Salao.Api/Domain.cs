@@ -6,12 +6,14 @@ public class Product { public long Id { get; set; } public string Name { get; se
 public class Appointment { public long Id { get; set; } public long ClientId { get; set; } public Client? Client { get; set; } public DateTime StartsAt { get; set; } public string Status { get; set; } = "Agendado"; public bool BookingFeePaid { get; set; } public List<AppointmentItem> Items { get; set; } = []; public List<Receivable> Receivables { get; set; } = []; }
 public class AppointmentItem { public long Id { get; set; } public long AppointmentId { get; set; } public long? ServiceId { get; set; } public long? ProductId { get; set; } public string Description { get; set; } = ""; public decimal UnitPrice { get; set; } public int Quantity { get; set; } }
 public class Receivable { public long Id { get; set; } public long AppointmentId { get; set; } public Appointment? Appointment { get; set; } public decimal Amount { get; set; } public int InstallmentNumber { get; set; } public DateOnly DueDate { get; set; } public bool Paid { get; set; } public string? PaymentMethod { get; set; } public DateTime? PaidAt { get; set; } }
+public class AdminCredential { public short Id { get; set; } = 1; public string AccessCodeHash { get; set; } = ""; public string ChangeCodeHash { get; set; } = ""; public string SessionKey { get; set; } = ""; public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; }
 
 public record CreateAppointment(long ClientId, DateTime StartsAt, List<SaleItemInput> Items, bool BookingFeePaid = false);
 public record CheckoutInput(string Mode, string? PaymentMethod, List<DeferredPaymentInput>? Installments);
 public record DeferredPaymentInput(decimal Amount, DateOnly DueDate, bool IsEntry = false);
 public record MarkReceivablePaidInput(string PaymentMethod);
 public record AdminAccessInput(string AccessCode);
+public record AdminChangeCodesInput(string CurrentChangeCode, string NewAccessCode, string NewChangeCode);
 public record UpdateProductInput(string Name, decimal Price, int Stock);
 public record UpdateServicePriceInput(decimal Price);
 public record CreateCatalogServiceInput(string Category, string Name, string? Variant, string? HairLength, decimal Price, bool PriceIsStartingAt = false);
