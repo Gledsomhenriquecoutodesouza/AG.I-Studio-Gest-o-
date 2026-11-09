@@ -202,3 +202,66 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 @media(max-width:1200px){.app-layout-agenda{grid-template-columns:205px minmax(0,1fr)!important;gap:16px!important;padding:14px 18px 24px!important}.agenda-workspace{grid-template-columns:1fr;gap:14px}.agenda-day-list{max-height:none;overflow:visible;padding-right:0;scrollbar-gutter:auto}.agenda-calendar{max-width:none}}
 @media(max-width:800px){.app-header-inner{align-items:flex-start!important;flex-wrap:wrap;gap:10px;padding:12px 16px!important}.app-layout{gap:18px!important;padding:18px 16px 28px!important}.app-layout-agenda{grid-template-columns:minmax(0,1fr)!important;padding:12px!important}.app-layout-agenda>nav.card{position:relative;top:auto}.agenda-view{padding:14px!important}.agenda-workspace{grid-template-columns:minmax(0,1fr);gap:12px}.agenda-date-controls{grid-template-columns:1fr 1fr!important}.agenda-date-controls>div:last-child{grid-column:1/-1;justify-content:flex-start}.agenda-date-controls>div:last-child button{flex:1}.agenda-day-list{max-height:none;overflow:visible}.agenda-appointment-actions{justify-content:flex-start}.agenda-appointment-info{flex-basis:100%}}
 @media(max-width:560px){.app-header-inner{padding:10px 12px!important}.app-header-inner>div:last-child{justify-content:flex-start}.agenda-heading{align-items:flex-start!important;gap:8px}.agenda-heading h3{max-width:62%;font-size:.96rem}.agenda-heading .btn{flex:0 0 auto;font-size:.76rem;padding:7px 9px}.agenda-view{padding:12px!important}.agenda-date-controls{gap:8px!important}.agenda-date-controls button{font-size:.76rem;padding:7px 8px}.agenda-day{min-height:40px!important}.agenda-appointment-actions{width:100%;justify-content:flex-start}.agenda-status{flex-basis:100%;max-width:none}.agenda-appointment-actions .btn,.agenda-appointment-actions>button{min-height:36px}}
+.app-shell>header.app-header{position:sticky;top:0;z-index:120;overflow:visible;background:transparent!important;border:0!important;border-bottom:1px solid #e3d9df!important;box-shadow:none!important;backdrop-filter:none!important}
+.app-header-inner{position:relative;width:100%;max-width:none!important;min-height:104px;padding:12px clamp(16px,2.6vw,42px)!important}
+.app-brand{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:190px}
+.app-brand h1{margin-top:2px;letter-spacing:-.025em}
+.app-header-meta{max-width:70%;gap:10px!important}
+.app-layout{display:block!important;width:100%;max-width:none!important;margin:0!important;padding:20px clamp(16px,2.6vw,42px) 38px!important}
+.app-layout>section{width:100%;min-width:0;max-width:none}
+.app-layout-agenda{grid-template-columns:none!important;gap:0!important;padding:12px clamp(16px,2.2vw,36px) 28px!important}
+.app-layout-agenda>section{gap:0!important}
+.menu-control{position:static;display:flex;align-items:flex-start}
+.menu-trigger{display:inline-flex;min-height:36px;align-items:center;gap:9px;padding:7px 13px!important;border:1px solid #e5d6df!important;border-radius:11px!important;background:rgba(255,255,255,.55);color:#783c5d;font-size:.88rem;font-weight:650;box-shadow:0 3px 10px #44162a0a}
+.menu-trigger:hover{background:#f8edf3;transform:translateY(-1px);box-shadow:0 6px 16px #44162a16}
+.menu-trigger-icon{font-size:.95rem;line-height:1}
+.menu-backdrop{position:fixed;inset:0;z-index:121;width:100%;height:100%;padding:0;border:0!important;border-radius:0!important;background:#20152230;cursor:default}
+.main-menu-overlay{position:absolute;top:100%;left:0;right:0;z-index:122;width:100%;padding:0 clamp(16px,2.6vw,42px) 18px;transform-origin:top center;animation:menu-drop-down .22s cubic-bezier(.2,.75,.25,1) both}
+.main-menu-overlay-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;border:1px solid #e7dce2;border-bottom:0;border-radius:0 0 0 0;background:#fffdfa;color:#493944;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.menu-close{border:0!important;background:transparent;color:#715d6b;font-size:.78rem;font-weight:650}
+.menu-close span{margin-left:5px;font-size:1rem}
+.main-menu{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));align-items:start;gap:10px!important;max-height:min(62vh,520px);overflow:auto;padding:12px!important;border:1px solid #e7dce2;border-top:0;border-radius:0 0 19px 19px;background:#fffdfa;box-shadow:0 22px 45px #25111e26}
+.main-menu .menu-group{min-width:0;padding:6px;border:1px solid #eee7eb;border-radius:14px;background:#fff}
+.main-menu .menu-group-toggle,.main-menu>.menu-link{min-height:42px;padding:9px 12px;border-radius:10px}
+.main-menu .menu-subitems{margin:3px 0 0 6px;padding:4px 0 2px 8px}
+.main-menu .menu-link{min-height:36px;padding:7px 10px;font-size:.86rem}
+.menu-group-toggle:disabled{opacity:.45;cursor:not-allowed}
+.theme-dark.app-shell>header.app-header{border-color:#505054!important}
+.theme-gold.app-shell>header.app-header{border-color:#e1d6ae!important}
+.theme-christmas.app-shell>header.app-header{border-color:#d8e1d4!important}
+.theme-dark .menu-trigger{background:#37383d;border-color:#57585d!important;color:#ececee}
+.theme-dark .menu-trigger:hover{background:#48494f}
+.theme-dark .main-menu-overlay-head,.theme-dark .main-menu{background:#343539;color:#eeeeef;border-color:#55565a}
+.theme-dark .main-menu .menu-group{background:#3e3f44;border-color:#55565a}
+.theme-gold .menu-trigger{background:#fffdf5;border-color:#e0d4ac!important;color:#775f22}
+.theme-gold .main-menu-overlay-head,.theme-gold .main-menu{background:#fffefa;color:#40371f;border-color:#e0d4ac}
+.theme-gold .main-menu .menu-group{background:#fffdf7;border-color:#e9dfbd}
+.theme-christmas .menu-trigger{background:#fffefa;border-color:#d7dfce!important;color:#38513f}
+.theme-christmas .main-menu-overlay-head,.theme-christmas .main-menu{background:#fffefa;color:#34463a;border-color:#d9e3d6}
+.theme-christmas .main-menu .menu-group{background:#f8faf5;border-color:#dce5d9}
+.client-registration{display:grid;gap:16px}
+.client-reg-hero{position:relative;display:flex;min-height:150px;align-items:center;justify-content:space-between;gap:24px;overflow:hidden;padding:24px clamp(20px,3vw,38px);border:1px solid #eadbe3;border-radius:22px;background:linear-gradient(110deg,#fff 0%,#fbf4f8 58%,#f3e7ef 100%);box-shadow:0 10px 28px #4a1b320c}
+.client-reg-hero::after{position:absolute;right:80px;bottom:-100px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,#d5a9be24,transparent 70%);content:"";pointer-events:none}
+.client-reg-copy{position:relative;z-index:1;max-width:760px}
+.client-reg-kicker{color:#995a79;font-size:.68rem;font-weight:750;letter-spacing:.19em}
+.client-reg-copy h3{margin:8px 0 5px;color:#3b2d37;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2vw,1.8rem);letter-spacing:-.03em;line-height:1.25}
+.client-reg-copy p{margin:0;color:#71636d;font-size:.9rem;line-height:1.5}
+.client-reg-count{position:relative;z-index:1;display:flex;min-width:170px;align-items:center;gap:12px;padding:13px 17px;border:1px solid #ead9e2;border-radius:16px;background:#ffffffa8;color:#78425f}
+.client-reg-count>span{font-family:Georgia,"Times New Roman",serif;font-size:2.2rem;font-weight:700}
+.client-reg-count small{font-size:.72rem;line-height:1.25}
+.client-reg-count svg{width:35px;height:35px;margin-left:auto;fill:none;stroke:#aa7190;stroke-linecap:round;stroke-linejoin:round;stroke-width:3}
+.theme-dark .client-reg-hero{border-color:#505056;background:linear-gradient(110deg,#393a40,#323338)}.theme-dark .client-reg-copy h3{color:#f0edf0}.theme-dark .client-reg-copy p,.theme-dark .client-reg-kicker{color:#d0cbd0}.theme-dark .client-reg-count{border-color:#55565a;background:#414247;color:#ededee}.theme-dark .client-reg-count svg{stroke:#c5c5c9}
+.theme-gold .client-reg-hero{border-color:#e1d5ae;background:linear-gradient(110deg,#fffefa,#f8f3e2)}.theme-gold .client-reg-copy h3,.theme-gold .client-reg-kicker,.theme-gold .client-reg-count{color:#70591e}.theme-gold .client-reg-count{border-color:#e5d8b1;background:#fffdf5}.theme-gold .client-reg-count svg{stroke:#b29240}
+.theme-christmas .client-reg-hero{border-color:#d8e1d4;background:linear-gradient(110deg,#fffefa,#eef4ec)}.theme-christmas .client-reg-copy h3,.theme-christmas .client-reg-kicker,.theme-christmas .client-reg-count{color:#38513f}.theme-christmas .client-reg-count{border-color:#d9e3d6;background:#fffefa}.theme-christmas .client-reg-count svg{stroke:#66816b}
+.app-layout-agenda .agenda-workspace{grid-template-columns:minmax(430px,1.12fr) minmax(390px,.88fr);gap:22px}
+@media(max-width:1000px){.app-header-inner{align-items:flex-start;gap:18px}.app-brand{min-width:170px}.app-header-meta{max-width:65%}.app-layout-agenda .agenda-workspace{grid-template-columns:1fr}}
+@media(max-width:760px){.app-header-inner{min-height:0;flex-direction:column;align-items:stretch!important;gap:12px;padding:12px 16px!important}.app-brand{flex-direction:row;align-items:flex-end;justify-content:space-between}.app-header-meta{max-width:none;justify-content:flex-start!important}.app-layout{padding:16px 16px 30px!important}.app-layout-agenda{padding:10px 12px 24px!important}.main-menu-overlay{padding:0 12px 12px}.main-menu{grid-template-columns:repeat(2,minmax(0,1fr));max-height:65vh}.client-reg-hero{min-height:0;align-items:flex-start;padding:20px;gap:12px}.client-reg-count{min-width:130px;padding:10px 12px}.client-reg-count svg{display:none}}
+@media(max-width:520px){.app-brand{align-items:flex-start;flex-direction:column}.menu-trigger{min-height:34px}.app-header-meta{gap:7px!important}.app-header-meta>div:first-child{width:100%;text-align:left}.main-menu{grid-template-columns:1fr;max-height:62vh}.main-menu .menu-group{padding:4px}.client-reg-hero{flex-direction:column}.client-reg-count{min-width:0;width:100%}.agenda-workspace{grid-template-columns:1fr!important}.agenda-heading{align-items:flex-start!important}}
+@keyframes menu-drop-down{from{opacity:0;transform:translateY(-14px) scaleY(.97)}to{opacity:1;transform:translateY(0) scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.main-menu-overlay{animation:none}}
+/* Final layout refinements: anchor the drop-down to the Menu button on every screen size. */
+.menu-control{position:relative;z-index:1;display:flex;align-items:flex-start}
+.main-menu-overlay{position:absolute;top:calc(100% + 8px);left:0;right:auto;width:min(1100px,calc(100vw - 32px));padding:0 0 18px}
+@media(max-width:760px){.app-brand{flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important}.main-menu-overlay{width:calc(100vw - 24px);padding:0 0 12px}.app-header-meta{width:100%;max-width:none;justify-content:flex-start!important}}
+.menu-backdrop{z-index:0}
+.main-menu-overlay{z-index:2}
