@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 190" fill="none">
+ <defs><radialGradient id="snow" cx="0" cy="0" r="1" gradientTransform="matrix(55 85 -72 46 54 48)" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#DCE8E8"/></radialGradient><linearGradient id="scarf" x1="45" y1="87" x2="109" y2="105"><stop stop-color="#9B3345"/><stop offset="1" stop-color="#C55459"/></linearGradient></defs>
+ <circle cx="75" cy="130" r="49" fill="url(#snow)" stroke="#CCDAD8" stroke-width="2"/><circle cx="75" cy="65" r="34" fill="url(#snow)" stroke="#CCDAD8" stroke-width="2"/>
+ <path d="M45 53h60L97 25H54z" fill="#354E43" stroke="#C6A85F" stroke-width="2"/><path d="M40 53h70" stroke="#354E43" stroke-width="8" stroke-linecap="round"/>
+ <path d="M54 91c12 7 30 7 42 0l8 12c-16 10-43 10-59 0z" fill="url(#scarf)"/><path d="m91 100 8 3-5 30-11-2z" fill="#B4434E"/>
+ <circle cx="64" cy="63" r="3.3" fill="#344139"/><circle cx="86" cy="63" r="3.3" fill="#344139"/><path d="m73 70 3 2-5 10-6-2z" fill="#D17E4C"/>
+ <circle cx="75" cy="120" r="3.5" fill="#64736A"/><circle cx="75" cy="139" r="3.5" fill="#64736A"/><circle cx="75" cy="158" r="3.5" fill="#64736A"/><path d="M28 108 7 99M122 108l21-10" stroke="#8A6743" stroke-width="4" stroke-linecap="round"/>
+ <path d="M50 39c7-6 14-8 22-8" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+</svg>

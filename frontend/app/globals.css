@@ -98,3 +98,62 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 .theme-christmas .menu-subitems{border-color:#d9dfcc}
 @media(max-width:800px){.main-menu{display:flex!important;flex-direction:row;align-items:flex-start;gap:7px}.menu-group{min-width:max-content}.menu-subitems{position:absolute;z-index:30;min-width:200px;margin:0;padding:8px;border:1px solid #eee5e9;border-radius:14px;background:#fff;box-shadow:0 12px 28px #29111a1c}.menu-group{position:relative}.menu-link,.menu-group-toggle{min-width:max-content}.theme-dark .menu-subitems{background:#393a3f;border-color:#55565a}.theme-gold .menu-subitems{background:#fffefa;border-color:#d8c77e}.theme-christmas .menu-subitems{background:#fffefa;border-color:#d9e3d6}}
 @media(max-width:800px){.menu-subitems{position:static!important;min-width:0;margin:0 0 6px 10px;box-shadow:none!important}.app-layout>nav.main-menu{overflow-x:auto;overflow-y:visible}}
+.theme-christmas .app-layout{position:relative;z-index:1}
+.christmas-dashboard{--holiday-forest:#354F42;--holiday-red:#9D3543;--holiday-gold:#B58D42;--holiday-cream:#FBF9F1;--holiday-muted:#66766A;font-family:Georgia,"Times New Roman",serif}
+.christmas-dashboard .app-layout h2,.christmas-dashboard .app-layout h3,.christmas-dashboard .app-layout h4{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.025em}
+.christmas-dashboard .app-layout>section>div:first-child>p{font-family:ui-sans-serif,system-ui,sans-serif}
+.christmas-dashboard .card{border-color:#d8e1d4;background:linear-gradient(145deg,#fffefa,#f5f7f0);box-shadow:0 14px 38px #304b3710}
+.christmas-dashboard .dashboard-stat{border-radius:22px;background:linear-gradient(145deg,#fffefa,#f4f7f0);box-shadow:0 10px 28px #304b370e}
+.christmas-dashboard .dashboard-stat::after{background:radial-gradient(circle,#c4a65c2e,transparent 72%)}
+.christmas-dashboard .dashboard-clock{border-color:#dfd5b8;background:linear-gradient(135deg,#fffefa,#f4f0e1);box-shadow:0 16px 42px #80612616}
+.christmas-dashboard .digital-clock{background:linear-gradient(100deg,#9A7130,#D5B866 48%,#A33B47 88%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 12px 12px #795c2e42)}
+.christmas-dashboard .btn{background:linear-gradient(115deg,#963946,#BC4C55);box-shadow:0 7px 16px #8d263126}
+.christmas-banner{position:relative;isolation:isolate;display:flex;align-items:center;min-height:150px;gap:clamp(18px,3vw,42px);overflow:hidden;padding:24px clamp(22px,4vw,52px);border:1px solid #d7dfce;border-radius:26px;background:linear-gradient(110deg,#fffefa 0%,#f8f5e9 58%,#edf3e9 100%);box-shadow:0 14px 36px #304b3710}
+.christmas-banner::after{content:"";position:absolute;z-index:-1;inset:auto -30px -88px auto;width:320px;height:220px;border-radius:50%;background:radial-gradient(ellipse,#d9c77a24,transparent 72%)}
+.christmas-banner-art{width:clamp(120px,19vw,230px);height:auto;flex:0 0 auto;opacity:var(--christmas-intensity,.58)}
+.christmas-banner-copy{position:relative;z-index:1;max-width:680px}
+.christmas-eyebrow{display:block;margin-bottom:9px;color:#987335;font:700 .68rem/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.2em}
+.christmas-banner h3{margin:0;color:#304639;font:600 clamp(1.35rem,2.1vw,1.9rem)/1.22 Georgia,"Times New Roman",serif}
+.christmas-banner p{margin:.65rem 0 0;color:#637267;font:400 .92rem/1.5 ui-sans-serif,system-ui,sans-serif}
+.christmas-banner-star{position:absolute;top:22px;right:25px;width:52px;height:52px;opacity:var(--christmas-intensity,.58);animation:christmas-star-glow 4.5s ease-in-out infinite}
+.christmas-decor{z-index:0;opacity:var(--christmas-intensity,.58)}
+.christmas-decor .snowman,.christmas-decor .tree,.christmas-decor .ornament{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 9px 14px #344c3820)}
+.christmas-decor .snowman-left{left:5px;bottom:18px;width:clamp(64px,8vw,118px);opacity:.4}
+.christmas-decor .tree-right{right:10px;bottom:14px;width:clamp(76px,10vw,146px);opacity:.22}
+.christmas-decor .ornament-left{top:28px;left:8px;width:clamp(34px,4vw,56px);opacity:.75}
+.christmas-decor .ornament-right{top:65px;right:18px;width:clamp(34px,4vw,56px);opacity:.7}
+.christmas-decor::before{height:30px;background:radial-gradient(circle,#f4d778 0 3px,transparent 4.5px) 12px 13px/52px 25px repeat-x,radial-gradient(circle,#c64d56 0 3px,transparent 4.5px) 38px 13px/52px 25px repeat-x,radial-gradient(circle,#68866b 0 3px,transparent 4.5px) 64px 13px/52px 25px repeat-x}
+.theme-adjustments{max-height:68vh;overflow-y:auto;margin-top:10px;padding:12px;border-top:1px solid #eee5e9;color:#5d5360}
+.theme-range{width:100%;height:20px;margin:7px 0;accent-color:#b38b3d;cursor:pointer}
+.theme-motion{display:flex;align-items:center;gap:8px;margin:4px 0 10px;font-size:12px;cursor:pointer}
+.theme-motion input{accent-color:#9b4050}
+.theme-disable{width:100%;padding:8px;border:1px solid #eadfe8;background:#fff;border-radius:9px;font-size:12px;color:#7f3645}
+.theme-disable:hover{background:#fbf0ed}
+.theme-christmas .theme-adjustments{border-color:#e1d8bd;color:#485b4c}
+.theme-christmas .theme-disable{border-color:#dec9bf;background:#fffefa;color:#863d43}
+.christmas-no-motion .christmas-decor::before,.christmas-no-motion .christmas-banner-star{animation:none!important}
+.christmas-no-motion .christmas-decor::before,.christmas-no-motion .christmas-banner-star{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.christmas-dashboard *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@keyframes christmas-star-glow{0%,100%{filter:drop-shadow(0 2px 4px #b18b4344);transform:scale(1)}50%{filter:drop-shadow(0 4px 12px #d6b95b88);transform:scale(1.06)}}
+@media(max-width:720px){.christmas-banner{min-height:128px;gap:14px;padding:20px 18px}.christmas-banner-art{width:clamp(80px,22vw,130px)}.christmas-banner-star{width:34px;height:34px;right:12px;top:12px}.christmas-banner-copy{padding-right:18px}.christmas-banner p{font-size:.82rem}.christmas-decor .tree-right,.christmas-decor .ornament-right{right:4px}}
+.theme-christmas.app-shell{background:radial-gradient(ellipse at 8% 0%,#fffef9 0,transparent 38%),linear-gradient(150deg,#faf8ef,#edf3ed);color:#293a30}
+.theme-christmas.app-shell>header{background:rgba(255,254,250,.96)!important;color:#293a30!important;border-color:#d9e3d6!important}
+.theme-christmas .app-layout>nav.card,.theme-christmas .card{background:linear-gradient(145deg,#fffefa,#f5f7f0);border-color:#d9e3d6;color:#2e3c32;box-shadow:0 12px 34px #17362212}
+.theme-christmas [class~="bg-white"],.theme-christmas .field,.theme-christmas input:not([type="checkbox"]):not([type="radio"]),.theme-christmas select,.theme-christmas textarea{background:#fffefa!important;color:#2c382f;border-color:#d8e0d2}
+.theme-christmas .field:focus,.theme-christmas input:focus,.theme-christmas select:focus,.theme-christmas textarea:focus{border-color:#bd9b52!important;box-shadow:0 0 0 4px #bd9b521f;outline:none}
+.theme-christmas .label,.theme-christmas [class*="text-[#756773]"],.theme-christmas [class*="text-[#685c66]"],.theme-christmas [class*="text-[#995a79]"],.theme-christmas [class*="text-[#823d60]"],.theme-christmas [class*="text-[#c23f83]"],.theme-christmas [class*="text-[#8d4268]"]{color:#5d6c60!important}
+.theme-christmas [class*="bg-[#f8f2f5]"],.theme-christmas [class*="bg-[#f5eaf0]"],.theme-christmas [class*="bg-[#fdf7fa]"],.theme-christmas [class*="bg-[#faf7f9]"]{background:linear-gradient(110deg,#eef3eb,#f8f1e3)!important;color:#35483b}
+.theme-christmas [class*="border-[#995a79]"],.theme-christmas [class*="border-[#eee5e9]"],.theme-christmas [class*="border-[#eadfe8]"]{border-color:#d8e0d2!important}
+.theme-christmas [class*="bg-[#995a79]"],.theme-christmas [class*="bg-[#8d4268]"]{background:linear-gradient(115deg,#963946,#BC4C55)!important;color:#fff!important}
+.theme-christmas [class*="bg-[#995a79]"] [class*="text-white"],.theme-christmas [class*="bg-[#8d4268]"] [class*="text-white"]{color:#fff!important}
+.theme-christmas .btn{background:linear-gradient(115deg,#963946,#BC4C55);color:#fff;box-shadow:0 7px 16px #8d263126}
+.theme-christmas .btn:hover:not(:disabled){background:linear-gradient(115deg,#7F2D3B,#A83F49);box-shadow:0 10px 20px #842c3633}
+.theme-christmas button:not(.btn):hover:not(:disabled){border-color:#d8c07c}
+.theme-christmas input[type="checkbox"],.theme-christmas input[type="radio"]{accent-color:#9d404c}
+.theme-christmas .dashboard-stat{background:linear-gradient(145deg,#fffefa,#f3f7ef)}
+.theme-christmas .dashboard-clock{border-color:#d8dfc9;background:linear-gradient(135deg,#fffefa,#f5f0df);box-shadow:0 16px 42px #8061261b}
+.theme-christmas .digital-clock{background:linear-gradient(100deg,#a47a26,#e0c36b 48%,#a43a46 84%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 12px 12px #795c2e44)}
+.theme-christmas .menu-group-toggle,.theme-christmas .menu-link{color:#536356}
+.theme-christmas .menu-group-toggle:hover,.theme-christmas .menu-link:hover:not(:disabled),.theme-christmas .menu-group-toggle.is-active,.theme-christmas .menu-link.is-active{background:linear-gradient(110deg,#e8f0e6,#f8ece0)!important;color:#9a6c25!important}
+.theme-christmas .menu-subitems{border-color:#d9dfcc}
+.theme-christmas .checkout-modal>div:first-child{border-color:#d9e3d6}
