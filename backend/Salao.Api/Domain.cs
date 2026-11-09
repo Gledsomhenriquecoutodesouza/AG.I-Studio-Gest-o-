@@ -1,13 +1,16 @@
 namespace Salao.Api;
 
 public class Client { public long Id { get; set; } public string Name { get; set; } = ""; public string? Phone { get; set; } }
-public class CatalogService { public long Id { get; set; } public string Category { get; set; } = ""; public string Name { get; set; } = ""; public string? Variant { get; set; } public string? HairLength { get; set; } public decimal Price { get; set; } public bool PriceIsStartingAt { get; set; } }
+public class CatalogService { public long Id { get; set; } public string Category { get; set; } = ""; public string Name { get; set; } = ""; public string? Variant { get; set; } public string? HairLength { get; set; } public decimal Price { get; set; } public bool PriceIsStartingAt { get; set; } public bool Active { get; set; } = true; }
 public class Product { public long Id { get; set; } public string Name { get; set; } = ""; public decimal Price { get; set; } public int Stock { get; set; } }
 public class Appointment { public long Id { get; set; } public long ClientId { get; set; } public Client? Client { get; set; } public DateTime StartsAt { get; set; } public string Status { get; set; } = "Agendado"; public bool BookingFeePaid { get; set; } public List<AppointmentItem> Items { get; set; } = []; public List<Receivable> Receivables { get; set; } = []; }
 public class AppointmentItem { public long Id { get; set; } public long AppointmentId { get; set; } public long? ServiceId { get; set; } public long? ProductId { get; set; } public string Description { get; set; } = ""; public decimal UnitPrice { get; set; } public int Quantity { get; set; } }
 public class Receivable { public long Id { get; set; } public long AppointmentId { get; set; } public Appointment? Appointment { get; set; } public decimal Amount { get; set; } public int InstallmentNumber { get; set; } public DateOnly DueDate { get; set; } public bool Paid { get; set; } public string? PaymentMethod { get; set; } public DateTime? PaidAt { get; set; } }
 public class AdminCredential { public short Id { get; set; } = 1; public string AccessCodeHash { get; set; } = ""; public string ChangeCodeHash { get; set; } = ""; public string SessionKey { get; set; } = ""; public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; }
 public class SalonUser { public long Id { get; set; } public string Name { get; set; } = ""; public string AccessCodeHash { get; set; } = ""; public string? ChangeCodeHash { get; set; } public string SessionKey { get; set; } = ""; public bool CanManageCatalog { get; set; } public bool CanChangePrices { get; set; } public bool Active { get; set; } = true; public DateTime CreatedAt { get; set; } = DateTime.UtcNow; }
+public class MonthlyServicePackage { public long Id { get; set; } public long ClientId { get; set; } public Client? Client { get; set; } public DateOnly Month { get; set; } public decimal Price { get; set; } public bool Completed { get; set; } public DateTime CreatedAt { get; set; } = DateTime.UtcNow; public List<MonthlyPackageItem> Items { get; set; } = []; public List<MonthlyPackageSession> Sessions { get; set; } = []; }
+public class MonthlyPackageItem { public long Id { get; set; } public long PackageId { get; set; } public MonthlyServicePackage? Package { get; set; } public long? ServiceId { get; set; } public string Description { get; set; } = ""; }
+public class MonthlyPackageSession { public long Id { get; set; } public long PackageId { get; set; } public MonthlyServicePackage? Package { get; set; } public int Number { get; set; } public bool Completed { get; set; } public DateTime? CompletedAt { get; set; } }
 
 public record CreateAppointment(long ClientId, DateTime StartsAt, List<SaleItemInput> Items, bool BookingFeePaid = false);
 public record CheckoutInput(string Mode, string? PaymentMethod, List<DeferredPaymentInput>? Installments);
@@ -18,7 +21,11 @@ public record AdminChangeCodesInput(string CurrentChangeCode, string NewAccessCo
 public record CreateSalonUserInput(string Name, string AccessCode, string? ChangeCode, bool CanManageCatalog, bool CanChangePrices);
 public record UpdateSalonUserInput(string Name, string? AccessCode, string? ChangeCode, bool CanManageCatalog, bool CanChangePrices, bool Active);
 public record UpdateProductInput(string Name, decimal Price, int Stock);
-public record UpdateServicePriceInput(decimal Price);
+public record UpdateServicePriceInput(decimal Price, string? Category = null, string? Name = null, string? Variant = null, string? HairLength = null, bool? PriceIsStartingAt = null);
+public record CreateMonthlyPackageInput(long ClientId, DateOnly Month, decimal Price, List<long> ServiceIds);
+public record UpdateMonthlyPackageServicesInput(List<long> ServiceIds);
+public record UpdateMonthlyPackageSessionInput(bool Completed);
+public record AccessCodeInput(string AccessCode);
 public record CreateCatalogServiceInput(string Category, string Name, string? Variant, string? HairLength, decimal Price, bool PriceIsStartingAt = false);
 public record SaleItemInput(long? ServiceId, long? ProductId, string? Description, decimal? UnitPrice, int Quantity = 1);
 
