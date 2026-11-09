@@ -265,3 +265,25 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 @media(max-width:760px){.app-brand{flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important}.main-menu-overlay{width:calc(100vw - 24px);padding:0 0 12px}.app-header-meta{width:100%;max-width:none;justify-content:flex-start!important}}
 .menu-backdrop{z-index:0}
 .main-menu-overlay{z-index:2}
+
+/* Appointment layout: centered, balanced columns, and a clear primary action. */
+.appointment-form{width:100%;max-width:1440px;margin:0 auto;display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(320px,.85fr);grid-template-areas:"client client" "services date" "services time" "services booking" "services product" "summary summary" "note note";gap:16px!important;align-items:start}
+.appointment-client{grid-area:client}
+.appointment-services{grid-area:services;min-width:0}
+.appointment-date{grid-area:date}
+.appointment-time{grid-area:time}
+.appointment-booking-fee{grid-area:booking;align-self:stretch!important}
+.appointment-product{grid-area:product}
+.appointment-summary{grid-area:summary;width:100%;padding-top:10px;border-top:1px solid #eee5e9}
+.appointment-summary>.btn{min-width:210px;min-height:54px;padding:13px 26px;font-size:1.02rem}
+.appointment-note{grid-area:note;margin:0}
+.appointment-services>div{max-height:min(48vh,430px)!important;grid-template-columns:repeat(2,minmax(0,1fr))}
+.app-shell>header.app-header{background:#fffafb!important;border:0!important;border-bottom:1px solid #e3d9df!important;box-shadow:0 5px 18px #3113230a!important;backdrop-filter:none!important}
+.theme-dark.app-shell>header.app-header{background:#343539!important;border-bottom-color:#505054!important;box-shadow:0 5px 18px #00000020!important}
+.theme-gold.app-shell>header.app-header{background:#fffefa!important;border-bottom-color:#e1d6ae!important;box-shadow:0 5px 18px #70591e0a!important}
+.theme-christmas.app-shell>header.app-header{background:#fffefa!important;border-bottom-color:#d8e1d4!important;box-shadow:0 5px 18px #293b2c0a!important}
+.main-menu-overlay{transform-origin:left center;animation:menu-expand-horizontal .2s cubic-bezier(.2,.75,.25,1) both}
+.main-menu{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))}
+@keyframes menu-expand-horizontal{from{opacity:0;transform:translateX(-12px) scaleX(.94)}to{opacity:1;transform:translateX(0) scaleX(1)}}
+@media(max-width:760px){.appointment-form{grid-template-columns:minmax(0,1fr);grid-template-areas:"client" "services" "date" "time" "booking" "product" "summary" "note";gap:13px!important}.appointment-services>div{max-height:40vh!important;grid-template-columns:minmax(0,1fr)}.appointment-summary{align-items:stretch!important;gap:12px}.appointment-summary>.btn{width:100%;min-width:0}.app-shell>header.app-header{background:#fffafb!important}}
+@media(prefers-reduced-motion:reduce){.main-menu-overlay{animation:none}}
