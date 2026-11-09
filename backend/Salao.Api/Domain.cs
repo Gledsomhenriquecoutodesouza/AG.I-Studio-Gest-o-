@@ -26,6 +26,7 @@ public record UpdateProductInput(string Name, decimal Price, int Stock);
 public record UpdateServicePriceInput(decimal Price, string? Category = null, string? Name = null, string? Variant = null, string? HairLength = null, bool? PriceIsStartingAt = null);
 public record CreateMonthlyPackageInput(long ClientId, DateOnly Month, decimal Price, List<long> ServiceIds, decimal InitialPayment = 0, string PaymentMethod = "Pix");
 public record UpdateMonthlyPackageServicesInput(List<long> ServiceIds);
+public record UpdateMonthlyPackageInput(DateOnly Month, decimal Price, List<long> ServiceIds);
 public record UpdateMonthlyPackageSessionInput(bool Completed);
 public record AddMonthlyPackagePaymentInput(decimal Amount, string PaymentMethod);
 public record UpdateAppointmentRecordInput(string? Markings, string? Observations);
