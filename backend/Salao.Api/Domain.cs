@@ -20,6 +20,7 @@ public record DeferredPaymentInput(decimal Amount, DateOnly DueDate, bool IsEntr
 public record MarkReceivablePaidInput(string PaymentMethod);
 public record AdminAccessInput(string AccessCode);
 public record AdminChangeCodesInput(string CurrentChangeCode, string NewAccessCode, string NewChangeCode);
+public record AdminResetChangeCodeInput(string NewChangeCode);
 public record CreateSalonUserInput(string Name, string AccessCode, string? ChangeCode, bool CanManageCatalog, bool CanChangePrices);
 public record UpdateSalonUserInput(string Name, string? AccessCode, string? ChangeCode, bool CanManageCatalog, bool CanChangePrices, bool Active);
 public record UpdateProductInput(string Name, decimal Price, int Stock);
