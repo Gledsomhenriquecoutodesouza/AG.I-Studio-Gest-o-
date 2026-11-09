@@ -141,7 +141,34 @@ using (var scope = app.Services.CreateScope()) {
  ALTER TABLE public.appointments ADD COLUMN IF NOT EXISTS "BookingFeePaid" boolean NOT NULL DEFAULT FALSE;
  ALTER TABLE public.receivables ADD COLUMN IF NOT EXISTS "PaymentMethod" character varying(20);
  ALTER TABLE public.receivables ADD COLUMN IF NOT EXISTS "PaidAt" timestamp with time zone;
+ ALTER TABLE public.monthly_service_packages ADD COLUMN IF NOT EXISTS "CancelledAt" timestamp with time zone NULL;
  """);
+ // One-time, narrowly matched cancellation of the explicitly identified test package.
+ // It is hidden from active package lists and cash totals while payment/session history remains intact.
+ var cancelledTestPackages=await db.Database.ExecuteSqlRawAsync("""
+ WITH targets AS (
+   SELECT p."Id"
+   FROM public.monthly_service_packages p
+   JOIN public.clients c ON c."Id"=p."ClientId"
+   WHERE lower(trim(c."Name"))='claudia de assis'
+     AND p."Month"=DATE '2026-11-01'
+     AND p."Price"=250.00
+     AND p."Completed"=TRUE
+     AND p."CancelledAt" IS NULL
+     AND p."CreatedAt">=TIMESTAMPTZ '2026-11-09 18:15:00+00'
+     AND p."CreatedAt"< TIMESTAMPTZ '2026-11-09 18:25:00+00'
+     AND (SELECT COUNT(*) FROM public.monthly_package_sessions s WHERE s."PackageId"=p."Id" AND s."Completed")=4
+     AND (SELECT COUNT(*) FROM public.monthly_package_payments m WHERE m."PackageId"=p."Id")=1
+     AND (SELECT COALESCE(SUM(m."Amount"),0) FROM public.monthly_package_payments m WHERE m."PackageId"=p."Id")=250.00
+     AND (SELECT COUNT(*) FROM public.monthly_package_items i WHERE i."PackageId"=p."Id")=2
+     AND EXISTS(SELECT 1 FROM public.monthly_package_items i WHERE i."PackageId"=p."Id" AND i."Description" LIKE 'Progressiva Orgânica%')
+     AND EXISTS(SELECT 1 FROM public.monthly_package_items i WHERE i."PackageId"=p."Id" AND i."Description"='Combo Hidratação + Corte + Escova')
+     AND EXISTS(SELECT 1 FROM public.monthly_package_payments m WHERE m."PackageId"=p."Id" AND m."ReceivedAt">=TIMESTAMPTZ '2026-11-09 18:15:00+00' AND m."ReceivedAt"<TIMESTAMPTZ '2026-11-09 18:25:00+00')
+ ), unique_target AS (SELECT MIN("Id") AS "Id" FROM targets HAVING COUNT(*)=1)
+ UPDATE public.monthly_service_packages p SET "CancelledAt"=NOW()
+ WHERE p."Id"=(SELECT "Id" FROM unique_target) AND p."CancelledAt" IS NULL;
+ """);
+ if(cancelledTestPackages>0)app.Logger.LogInformation("Cancelled the confirmed Claudia de Assis test package; payment and session audit history were retained.");
  var adminCredential=await db.AdminCredentials.SingleOrDefaultAsync(x=>x.Id==1);
  if(adminCredential is null){
   var accessCode=builder.Configuration["Admin:AccessCode"]??"000000";
