@@ -287,3 +287,13 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 @keyframes menu-expand-horizontal{from{opacity:0;transform:translateX(-12px) scaleX(.94)}to{opacity:1;transform:translateX(0) scaleX(1)}}
 @media(max-width:760px){.appointment-form{grid-template-columns:minmax(0,1fr);grid-template-areas:"client" "services" "date" "time" "booking" "product" "summary" "note";gap:13px!important}.appointment-services>div{max-height:40vh!important;grid-template-columns:minmax(0,1fr)}.appointment-summary{align-items:stretch!important;gap:12px}.appointment-summary>.btn{width:100%;min-width:0}.app-shell>header.app-header{background:#fffafb!important}}
 @media(prefers-reduced-motion:reduce){.main-menu-overlay{animation:none}}
+
+/* Navigation should unfold downward as a compact left-side column. */
+.main-menu-overlay{left:0;right:auto;width:min(360px,calc(100vw - 24px));padding:0;transform-origin:top left;animation:menu-drop-down .22s cubic-bezier(.2,.75,.25,1) both}
+.main-menu{display:flex!important;flex-direction:column!important;align-items:stretch!important;grid-template-columns:none!important;gap:7px!important;max-height:min(68vh,560px);overflow-y:auto;overflow-x:hidden;padding:12px!important}
+.main-menu .menu-group{display:flex;flex-direction:column;min-width:0}
+.main-menu .menu-group-toggle,.main-menu>.menu-link{width:100%;justify-content:space-between;white-space:normal}
+.main-menu .menu-subitems{display:flex;flex-direction:column;align-items:stretch;margin:3px 0 4px 9px;padding:3px 0 3px 9px}
+.main-menu .menu-subitems .menu-link{width:100%;justify-content:flex-start}
+@media(max-width:760px){.main-menu-overlay{width:min(360px,calc(100vw - 24px));padding:0}.main-menu{grid-template-columns:none!important;max-height:68vh}}
+@media(prefers-reduced-motion:reduce){.main-menu-overlay{animation:none}}
