@@ -78,3 +78,23 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 @keyframes christmas-glow{from{opacity:.72;filter:drop-shadow(0 2px 3px #98732f44)}to{opacity:1;filter:drop-shadow(0 2px 8px #d7ad4a99)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .app-layout{position:relative;z-index:1}
+.main-menu{display:flex;flex-direction:column;gap:7px;min-width:0}
+.menu-group{display:flex;flex-direction:column;gap:4px}
+.menu-group-toggle,.menu-link{width:100%;min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border:1px solid transparent;border-radius:13px;background:transparent;color:#625763;text-align:left;font-size:.94rem;font-weight:560;cursor:pointer}
+.menu-group-toggle:hover,.menu-link:hover:not(:disabled){transform:translateX(2px);background:#f8edf3;color:#823d60}
+.menu-group-toggle.is-active,.menu-link.is-active{background:linear-gradient(110deg,#f5eaf0,#f8f1f5);color:#823d60;font-weight:700}
+.menu-chevron{font-size:1.15rem;transition:transform .18s ease}.menu-chevron.is-open{transform:rotate(180deg)}
+.menu-subitems{display:flex;flex-direction:column;gap:3px;margin:0 0 6px 11px;padding:4px 0 4px 11px;border-left:1px solid #e7d8e1}
+.menu-link{min-height:42px;padding:9px 12px;font-size:.9rem}
+.menu-overview,.menu-products,.menu-users{justify-content:flex-start;margin-top:2px}
+.theme-dark .menu-group-toggle,.theme-dark .menu-link{color:#dedee0}
+.theme-dark .menu-group-toggle:hover,.theme-dark .menu-link:hover:not(:disabled),.theme-dark .menu-group-toggle.is-active,.theme-dark .menu-link.is-active{background:#494a50!important;color:#f0f0f1!important}
+.theme-dark .menu-subitems{border-color:#5b5c60}
+.theme-gold .menu-group-toggle,.theme-gold .menu-link{color:#61552d}
+.theme-gold .menu-group-toggle:hover,.theme-gold .menu-link:hover:not(:disabled),.theme-gold .menu-group-toggle.is-active,.theme-gold .menu-link.is-active{background:linear-gradient(110deg,#fffdf4,#f1e7c8)!important;color:#725a18!important}
+.theme-gold .menu-subitems{border-color:#dfd2a8}
+.theme-christmas .menu-group-toggle,.theme-christmas .menu-link{color:#536356}
+.theme-christmas .menu-group-toggle:hover,.theme-christmas .menu-link:hover:not(:disabled),.theme-christmas .menu-group-toggle.is-active,.theme-christmas .menu-link.is-active{background:linear-gradient(110deg,#e8f0e6,#f8ece0)!important;color:#9a6c25!important}
+.theme-christmas .menu-subitems{border-color:#d9dfcc}
+@media(max-width:800px){.main-menu{display:flex!important;flex-direction:row;align-items:flex-start;gap:7px}.menu-group{min-width:max-content}.menu-subitems{position:absolute;z-index:30;min-width:200px;margin:0;padding:8px;border:1px solid #eee5e9;border-radius:14px;background:#fff;box-shadow:0 12px 28px #29111a1c}.menu-group{position:relative}.menu-link,.menu-group-toggle{min-width:max-content}.theme-dark .menu-subitems{background:#393a3f;border-color:#55565a}.theme-gold .menu-subitems{background:#fffefa;border-color:#d8c77e}.theme-christmas .menu-subitems{background:#fffefa;border-color:#d9e3d6}}
+@media(max-width:800px){.menu-subitems{position:static!important;min-width:0;margin:0 0 6px 10px;box-shadow:none!important}.app-layout>nav.main-menu{overflow-x:auto;overflow-y:visible}}
