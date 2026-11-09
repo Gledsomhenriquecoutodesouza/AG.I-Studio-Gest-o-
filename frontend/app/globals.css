@@ -163,3 +163,42 @@ button:not(.btn):not([aria-label]){border-radius:11px}
 .theme-dark .product-catalog-item{background:linear-gradient(135deg,#414247,#38393e);border-color:#55565a}.theme-dark .product-catalog-name{color:#f1f1f2}.theme-dark .product-catalog-price{color:#d1d1d3}
 .theme-gold .product-catalog-item{background:linear-gradient(135deg,#fff,#fbf7e9);border-color:#dfd3a5}.theme-gold .product-catalog-name,.theme-gold .product-catalog-price{color:#80651d}
 .theme-christmas .product-catalog-item{background:linear-gradient(135deg,#fffefa,#f3f7ef);border-color:#d9e3d6}.theme-christmas .product-catalog-name{color:#304639}.theme-christmas .product-catalog-price{color:#933c47}
+.app-shell>header.app-header{position:sticky;top:0;z-index:25;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.app-header-inner{max-width:1560px!important;padding:12px 28px!important}
+.theme-dark.app-shell>header.app-header,.theme-gold.app-shell>header.app-header,.theme-christmas.app-shell>header.app-header{background:transparent!important;border:0!important;box-shadow:none!important}
+.app-layout{max-width:1560px!important;gap:26px!important;padding:26px 28px 36px!important}
+.app-layout-agenda{max-width:100%!important;grid-template-columns:220px minmax(0,1fr)!important;gap:20px!important;padding:16px 22px 28px!important}
+.app-layout-agenda>section{min-width:0;gap:0}
+.app-layout-agenda>section>*+*{margin-top:12px!important}
+.agenda-view{min-width:0;padding:18px!important;border-radius:18px!important}
+.agenda-heading{min-height:38px;margin-bottom:10px!important}
+.agenda-heading h3{font-size:1.05rem}
+.agenda-heading .btn{min-height:38px;padding:8px 13px;font-size:.88rem}
+.agenda-workspace{display:grid;grid-template-columns:minmax(400px,.96fr) minmax(0,1.04fr);align-items:start;gap:20px}
+.agenda-calendar,.agenda-day-list{min-width:0}
+.agenda-controls{margin-bottom:0!important;padding-bottom:10px!important}
+.agenda-date-controls .field{min-height:38px;padding:8px 11px;font-size:.9rem}
+.agenda-date-controls .label{margin-bottom:4px}
+.agenda-date-controls button{padding:8px 10px;font-size:.82rem;white-space:nowrap}
+.agenda-date-controls>div:last-child{align-self:end}
+.agenda-weekday{padding:5px 2px!important;font-size:.7rem}
+.agenda-day{min-height:42px!important;border-radius:9px!important;padding:4px!important;font-size:.84rem!important;line-height:1.15}
+.agenda-day [class*="text-\[10px\]"]{font-size:9px;line-height:1.1}
+.agenda-calendar>p{margin-top:8px;font-size:.68rem}
+.agenda-day-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px;padding:0 2px 9px;border-bottom:1px solid #eee5e9;font-size:.9rem;font-weight:700}
+.agenda-day-list{max-height:calc(100dvh - 250px);min-height:220px;overflow:auto;overscroll-behavior:contain;padding-right:4px;scrollbar-gutter:stable}
+.agenda-appointment{padding:8px 2px!important;border-color:#eee5e9}
+.agenda-appointment-row{gap:8px!important}
+.agenda-appointment-info{flex:1 1 180px}
+.agenda-appointment-info>b{font-size:.9rem}
+.agenda-appointment-info>div{margin-top:2px;font-size:.75rem;line-height:1.35}
+.agenda-appointment-actions{flex:0 1 auto;flex-wrap:wrap;justify-content:flex-end;gap:6px!important}
+.agenda-appointment-actions .btn,.agenda-appointment-actions>button{min-height:34px;padding:6px 10px;font-size:.78rem;line-height:1.15}
+.agenda-status{max-width:130px;font-size:.72rem!important;line-height:1.25}
+.agenda-appointment-details{margin-top:8px!important;padding:10px!important}
+.agenda-appointment-details ul{margin:8px 0!important}
+.agenda-appointment-details button{min-height:34px;padding:7px 10px;font-size:.8rem}
+.agenda-appointment-details .grid{gap:6px}
+@media(max-width:1200px){.app-layout-agenda{grid-template-columns:205px minmax(0,1fr)!important;gap:16px!important;padding:14px 18px 24px!important}.agenda-workspace{grid-template-columns:1fr;gap:14px}.agenda-day-list{max-height:none;overflow:visible;padding-right:0;scrollbar-gutter:auto}.agenda-calendar{max-width:none}}
+@media(max-width:800px){.app-header-inner{align-items:flex-start!important;flex-wrap:wrap;gap:10px;padding:12px 16px!important}.app-layout{gap:18px!important;padding:18px 16px 28px!important}.app-layout-agenda{grid-template-columns:minmax(0,1fr)!important;padding:12px!important}.app-layout-agenda>nav.card{position:relative;top:auto}.agenda-view{padding:14px!important}.agenda-workspace{grid-template-columns:minmax(0,1fr);gap:12px}.agenda-date-controls{grid-template-columns:1fr 1fr!important}.agenda-date-controls>div:last-child{grid-column:1/-1;justify-content:flex-start}.agenda-date-controls>div:last-child button{flex:1}.agenda-day-list{max-height:none;overflow:visible}.agenda-appointment-actions{justify-content:flex-start}.agenda-appointment-info{flex-basis:100%}}
+@media(max-width:560px){.app-header-inner{padding:10px 12px!important}.app-header-inner>div:last-child{justify-content:flex-start}.agenda-heading{align-items:flex-start!important;gap:8px}.agenda-heading h3{max-width:62%;font-size:.96rem}.agenda-heading .btn{flex:0 0 auto;font-size:.76rem;padding:7px 9px}.agenda-view{padding:12px!important}.agenda-date-controls{gap:8px!important}.agenda-date-controls button{font-size:.76rem;padding:7px 8px}.agenda-day{min-height:40px!important}.agenda-appointment-actions{width:100%;justify-content:flex-start}.agenda-status{flex-basis:100%;max-width:none}.agenda-appointment-actions .btn,.agenda-appointment-actions>button{min-height:36px}}
