@@ -5,7 +5,7 @@ public class CatalogService { public long Id { get; set; } public string Categor
 public class Product { public long Id { get; set; } public string Name { get; set; } = ""; public decimal Price { get; set; } public int Stock { get; set; } }
 public class Appointment { public long Id { get; set; } public long ClientId { get; set; } public Client? Client { get; set; } public DateTime StartsAt { get; set; } public string Status { get; set; } = "Agendado"; public bool BookingFeePaid { get; set; } public List<AppointmentItem> Items { get; set; } = []; public List<Receivable> Receivables { get; set; } = []; public AppointmentRecord? Record { get; set; } }
 public class AppointmentRecord { public long Id { get; set; } public long AppointmentId { get; set; } public Appointment? Appointment { get; set; } public string Markings { get; set; } = ""; public string Observations { get; set; } = ""; public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; }
-public class AppointmentItem { public long Id { get; set; } public long AppointmentId { get; set; } public long? ServiceId { get; set; } public long? ProductId { get; set; } public string Description { get; set; } = ""; public decimal UnitPrice { get; set; } public int Quantity { get; set; } }
+public class AppointmentItem { public long Id { get; set; } public long AppointmentId { get; set; } public long? ServiceId { get; set; } public long? ProductId { get; set; } public string Description { get; set; } = ""; public decimal UnitPrice { get; set; } public int Quantity { get; set; } public string? Notes { get; set; } }
 public class Receivable { public long Id { get; set; } public long AppointmentId { get; set; } public Appointment? Appointment { get; set; } public decimal Amount { get; set; } public int InstallmentNumber { get; set; } public DateOnly DueDate { get; set; } public bool Paid { get; set; } public string? PaymentMethod { get; set; } public DateTime? PaidAt { get; set; } }
 public class AdminCredential { public short Id { get; set; } = 1; public string AccessCodeHash { get; set; } = ""; public string ChangeCodeHash { get; set; } = ""; public string SessionKey { get; set; } = ""; public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; }
 public class SalonUser { public long Id { get; set; } public string Name { get; set; } = ""; public string AccessCodeHash { get; set; } = ""; public string? ChangeCodeHash { get; set; } public string SessionKey { get; set; } = ""; public bool CanManageCatalog { get; set; } public bool CanChangePrices { get; set; } public bool Active { get; set; } = true; public DateTime CreatedAt { get; set; } = DateTime.UtcNow; }
@@ -15,7 +15,8 @@ public class MonthlyPackageSession { public long Id { get; set; } public long Pa
 public class MonthlyPackagePayment { public long Id { get; set; } public long PackageId { get; set; } public MonthlyServicePackage? Package { get; set; } public decimal Amount { get; set; } public string PaymentMethod { get; set; } = "Pix"; public DateTime ReceivedAt { get; set; } = DateTime.UtcNow; }
 
 public record CreateAppointment(long ClientId, DateTime StartsAt, List<SaleItemInput> Items, bool BookingFeePaid = false);
-public record CheckoutInput(string Mode, string? PaymentMethod, List<DeferredPaymentInput>? Installments);
+public record CheckoutInput(string Mode, string? PaymentMethod, List<DeferredPaymentInput>? Installments, List<AdditionalServiceInput>? AdditionalServices = null);
+public record AdditionalServiceInput(string Name, decimal Price, string? Observations);
 public record DeferredPaymentInput(decimal Amount, DateOnly DueDate, bool IsEntry = false);
 public record MarkReceivablePaidInput(string PaymentMethod);
 public record AdminAccessInput(string AccessCode);
